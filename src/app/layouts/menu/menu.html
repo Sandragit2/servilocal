@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: #20B2AA;">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center text-white fw-bold" routerLink="/main">
+      <img src="assets/img/logo.jpg" alt="logo" class="imagen-logo me-2"
+        style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 8px rgba(255,255,255,0.5);">
+      ServiLocal
+    </a>
+
+    <!-- Botón menú responsive -->
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Menú principal -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white fw-semibold hover-nav" routerLink="/main">Inicio</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white fw-semibold hover-nav" routerLink="/servicios">Servicios</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white fw-semibold hover-nav" routerLink="/trabajadores">Trabajadores</a>
+        </li>
+
+        <!-- Dropdown “Más” -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+            Más
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Nosotros</a></li>
+            <li><a class="dropdown-item" href="#">Contacto</a></li>
+          </ul>
+        </li>
+
+        <!-- 🔹 Login / Registro si NO hay sesión -->
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold hover-nav" routerLink="/login">Iniciar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold hover-nav" routerLink="/register">Registrarse</a>
+          </li>
+        </ng-container>
+      </ul>
+
+      <!-- 🔹 Avatar del usuario si está logueado -->
+      <div *ngIf="isLoggedIn && usuario" class="dropdown ms-3">
+        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#"
+           id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="avatar-user me-2" [ngStyle]="{'background-color': getAvatarColor(usuario.nombre)}">
+            {{ usuario.nombre ? usuario.nombre.charAt(0).toUpperCase() : 'U' }}
+          </div>
+          <span class="fw-semibold">{{ usuario.nombre }}</span>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+          <li class="dropdown-header text-center">
+            <strong>{{ usuario.nombre }}</strong><br>
+            <small class="text-muted text-capitalize">{{ usuario.rol }}</small>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="/perfil"><i class="bi bi-person me-2"></i>Mi cuenta</a></li>
+          <li><a class="dropdown-item" routerLink="/configuracion"><i class="bi bi-gear me-2"></i>Configuración</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+        </ul>
+      </div>
+
+      <!-- Buscador -->
+      <form class="d-flex ms-lg-3">
+        <input class="form-control me-2 rounded-pill" type="search" placeholder="Buscar..." aria-label="Search">
+        <button class="btn btn-light rounded-pill fw-semibold" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+

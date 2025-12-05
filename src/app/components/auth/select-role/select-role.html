@@ -1,0 +1,47 @@
+<!-- Barra superior -->
+<nav class="navbar shadow-sm px-4" style="background-color: #20B2AA;">
+  <span class="navbar-brand mb-0 h5 text-white fw-bold">
+    ServiLocal
+  </span>
+</nav>
+
+<!-- Contenedor principal -->
+<div class="role-container fade-in">
+  <h2>¡Hola, Bienvenid@ a ServiLocal!</h2>
+  <p class="subtitle">Selecciona el tipo de acceso con el que quieres continuar.</p>
+
+  <div class="roles">
+    <div class="role-card card-cliente" (click)="seleccionarRol('cliente')" title="Encuentra profesionales cerca de ti">
+      <div class="icon-wrapper cliente">
+        <img src="assets/icons/client.png" alt="Cliente">
+      </div>
+      <h3>Cliente</h3>
+      <p>Busca y contrata servicios fácilmente.</p>
+    </div>
+
+    <div class="role-card card-trabajador" (click)="seleccionarRol('trabajador')" title="Ofrece tus habilidades y aumenta tus ingresos">
+      <div class="icon-wrapper trabajador">
+        <img src="assets/icons/trabajador.png" alt="Trabajador">
+      </div>
+      <h3>Trabajador</h3>
+      <p>Ofrece tus servicios y gana más clientes.</p>
+    </div>
+
+    <div class="role-card card-admin" (click)="seleccionarRol('administrador')" title="Administra el sistema y supervisa usuarios">
+      <div class="icon-wrapper admin">
+        <img src="assets/icons/admin.png" alt="Administrador">
+      </div>
+      <h3>Administrador</h3>
+      <p>Gestiona usuarios, servicios y reseñas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer text-center">
+  <p>© 2025 ServiLocal — Todos los derechos reservados.</p>
+</footer>
+
+
+
+

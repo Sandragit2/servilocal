@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>
+      Iniciar sesión como <span>{{ usuario.rol | titlecase }}</span>
+    </h2>
+
+    <form (ngSubmit)="login()" class="login-form">
+
+      <!-- CORREO -->
+      <label for="correo">Correo electrónico</label>
+      <input
+        id="correo"
+        [(ngModel)]="usuario.correo"
+        name="correo"
+        type="email"
+        placeholder="Ingresa tu correo"
+        (input)="validarCorreo()"
+        required
+      />
+
+      <small class="error" [style.visibility]="errores.correo ? 'visible' : 'hidden'">
+        {{ errores.correo || 'placeholder' }}
+      </small>
+
+      <!-- CONTRASEÑA -->
+      <label for="contrasena">Contraseña</label>
+      <input
+  id="contrasena"
+  [(ngModel)]="usuario.contrasena"
+  name="contrasena"
+  [type]="mostrarPassword ? 'text' : 'password'"
+  placeholder="Ingresa tu contraseña"
+  (input)="mostrarContrasenaTemporal(); validarContrasena()"
+  required
+/>
+
+
+      <small class="error" [style.visibility]="errores.contrasena ? 'visible' : 'hidden'">
+        {{ errores.contrasena || 'placeholder' }}
+      </small>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p *ngIf="mensajeError" class="error">{{ mensajeError }}</p>
+
+    <p class="link" *ngIf="usuario.rol !== 'administrador'">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate aquí</a>
+    </p>
+
+    <button class="btn-volver" routerLink="/select-role">⬅ Regresar</button>
+  </div>
+</div>

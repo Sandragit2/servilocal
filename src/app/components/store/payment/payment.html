@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row justify-content-center">
+
+    <div class="col-10 col-sm-10 col-md-8 col-lg-7 text-center">
+      <h1>Proceso de Pago</h1>
+    </div>
+
+    <div class="col-10 col-sm-10 col-md-8 col-lg-7 card pb-2">
+
+      <div id="wallet_container"></div>
+      <div id="paymentBrick_container"></div>
+
+      @if ( isWallet ) {
+        <button class="btn btn-info" (click)="submitPurchase()"> Pagar Ahora </button>
+      }
+
+    </div>
+
+  </div>
+</div>

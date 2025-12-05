@@ -1,0 +1,157 @@
+/* Fondo general con degradado */
+.perfil-wrapper {
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* Cabecera del perfil */
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: #b1bee2;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+.foto-container {
+  flex-shrink: 0;
+}
+
+.foto-trabajador {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007bff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* Info del trabajador */
+.info-header {
+  flex: 1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.info-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #000000;
+  font-weight: 700;
+}
+
+.categoria {
+  font-size: 1.1rem;
+  color: #074991;
+  font-weight: 600;
+}
+
+.estrellas {
+  margin-top: 8px;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #519909;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.puntuacion {
+  margin-left: 8px;
+  color: #2e2c2c;
+}
+
+.no-calificacion {
+  color: #720a0a;
+  font-style: italic;
+}
+
+/* Cuerpo del perfil */
+.perfil-body {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #b1bee2;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.descripcion {
+  font-size: 1.1rem;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.info-contacto {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  margin-bottom: 20px;
+}
+
+.info-contacto p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #000000;
+}
+
+.info-extra h4 {
+  color: #045ebe;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.info-extra p {
+  color: #000000;
+}
+
+/* Reseñas */
+.resenas-section {
+  max-width: 900px;
+  margin: 30px auto;
+  background:#b1bee2;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.resenas-section h3 {
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+.resena-card {
+  background: #b1bee2;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.resena-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.no-resenas {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+.cargando {
+  text-align: center;
+  padding: 60px;
+  color: #555;
+  font-size: 1.2rem;
+}
+

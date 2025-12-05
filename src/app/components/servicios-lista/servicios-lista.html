@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h3 class="text-center fw-bold mb-4">Servicios Disponibles</h3>
+
+  <div class="row justify-content-center">
+    @for (servicio of servicios; track $index) {
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          
+          <!-- Imagen -->
+          <img [src]="servicio.imagen" 
+               class="card-img-top" 
+               alt="{{servicio.nombre}}">
+
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ servicio.nombre }}</h5>
+            <p class="card-text">{{ servicio.descripcion }}</p>
+
+            <!-- ⭐ Botón visible solo si hay sesión -->
+            <button 
+              *ngIf="isLoggedIn"
+              class="btn btn-primary"
+              (click)="verProfesionales(servicio.tipo)">
+              Ver profesionales
+            </button>
+
+            <!-- 🔒 Mensaje si NO hay sesión -->
+            <p *ngIf="!isLoggedIn" class="text-muted small mt-4">
+              Inicia sesión para ver los profesionales disponibles
+            </p>
+
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+
+

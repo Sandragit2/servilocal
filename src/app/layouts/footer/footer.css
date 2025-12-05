@@ -1,0 +1,16 @@
+.role-container {
+  padding-bottom: 80px; /* 🔹 espacio para que el footer no tape nada */
+}
+.footer {
+  position: fixed;       /* 👈 Lo fija en la parte inferior */
+  bottom: 0;
+  left: 0;
+  width: 100%;           /* Ocupa todo el ancho */
+  background-color: #222;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 12px 0;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* ligera sombra superior */
+  z-index: 1000;         /* se asegura de que quede por encima */
+}

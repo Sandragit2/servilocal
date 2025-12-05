@@ -1,0 +1,34 @@
+/* 🌟 Asegura que todas las tarjetas tengan la misma altura y aspecto */
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* Imagen ajustada */
+.card-img-top {
+  height: 220px;
+  object-fit: contain; /* <-- antes era 'cover' */
+  background-color: #c7dbee; /* color de fondo neutro */
+  padding: 10px;
+}
+
+/* Cuerpo con flex para empujar botón al final */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Botón centrado y con margen superior */
+.card-body .btn {
+  align-self: center;
+  margin-top: 10px;
+}

@@ -1,0 +1,13 @@
+<div class="container mt-4" *ngIf="trabajador">
+    <div class="card" style="width: 18rem;">
+    <img src="{{ 'http://localhost:5000/' + trabajador.foto_trabajador }}" class="card-img-top" alt="foto del trabajador" width="200">
+
+    <div class="card-body text-center">
+      <h4 class="card-title">{{ trabajador.nombre }}</h4>
+      <p class="card-text text-muted">{{ trabajador.descripcion_trabajo }}</p>
+      <p class="mb-1"><strong>Correo:</strong> {{ trabajador.correo_trabajador }}</p>
+      <p><strong>Teléfono:</strong> {{ trabajador.telefono_trabajador }}</p>
+      <a routerLink="/store/store" class="btn btn-primary">Volver</a>
+    </div>
+  </div>
+</div>

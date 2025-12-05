@@ -1,0 +1,141 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 0;
+  background: #f6f9fc;
+}
+
+.login-card {
+  background: white;
+  padding: 1.5rem 2.3rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  width: 390px;
+  text-align: center;
+  margin-top: -34px;
+}
+
+h2 {
+  color: #222;
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+
+h2 span {
+  color: #007bff;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 6px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  height: 16px;
+  display: block;
+  margin-bottom: auto;
+  margin-top: 1px;
+}
+
+.link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-volver {
+  margin-top: 8px;
+  background: #474646;
+}
+
+.btn-volver:hover {
+  background: #313bc7;
+}
+
+/* ===========================
+   RESPONSIVE PARA CELULARES
+   =========================== */
+@media (max-width: 480px) {
+
+  .login-wrapper {
+    padding: 20px;
+    height: auto;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  input {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .btn-volver {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .login-form {
+    gap: 0.7rem;
+  }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Crear cuenta</h2>
+
+    <form (ngSubmit)="registrar()">
+      
+<!-- Nombre -->
+<label>Nombre:</label>
+<input 
+  [(ngModel)]="usuario.nombre" 
+  name="nombre"
+  (input)="validarNombre()"
+  (keypress)="soloLetrasNombre($event)"
+  required 
+/>
+<p class="error">{{ errores.nombre }}</p>
+
+<!-- Apellidos -->
+<label>Apellidos:</label>
+<input 
+  [(ngModel)]="usuario.apellidos" 
+  name="apellidos"
+  (input)="validarApellidos()"
+  (keypress)="soloLetrasApellidos($event)"
+  required 
+/>
+<p class="error">{{ errores.apellidos }}</p>
+
+
+      <!-- Correo -->
+      <label>Correo:</label>
+      <input 
+        [(ngModel)]="usuario.correo" 
+        name="correo" 
+        type="email"
+        (input)="validarCorreo()"
+        required 
+      />
+      <p class="error" *ngIf="errores.correo">{{ errores.correo }}</p>
+
+      <!-- Contraseña -->
+      <label>Contraseña:</label>
+      <input
+        [(ngModel)]="usuario.contrasena"
+        name="contrasena"
+        [type]="mostrarPassword ? 'text' : 'password'"
+        (input)="mostrarContrasenaTemporal(); validarContrasena()"
+        required
+      />
+      <p class="error" *ngIf="errores.contrasena">{{ errores.contrasena }}</p>
+
+      <!-- Rol -->
+      <label>Rol:</label>
+      <select [(ngModel)]="usuario.rol" name="rol">
+        <option value="cliente">Cliente</option>
+        <option value="trabajador">Trabajador</option>
+
+      </select>
+
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <p class="exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+    <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+
+    <p class="link">
+      <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+    </p>
+
+        <button class="btn-volver1" routerLink="/select-role">⬅ Regresar</button>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<!-- 🌟 Menú superior -->
+<app-menu></app-menu>
+
+<!-- 🌟 Carrusel de imágenes -->
+<div class="container mt-4">
+  <div id="carouselExampleIndicators" class="carousel slide carrusel-ajustado">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+        class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/img/logo_albanil.jpg" class="d-block w-100 img-carrusel" alt="Albañilería">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/logo_electricista.jpg" class="d-block w-100 img-carrusel" alt="Electricista">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/logo_tutor.png" class="d-block w-100 img-carrusel" alt="Tutorías">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</div>
+
+<!-- 🌟 Sección de tipos de servicios -->
+<div class="container text-center mt-5">
+
+  <!-- 🔹 AQUÍ ya no va <app-store>, sino: -->
+  <app-servicios-lista></app-servicios-lista>
+</div>
+
+<!-- 🌟 Footer -->
+<app-footer></app-footer>
+
+
+

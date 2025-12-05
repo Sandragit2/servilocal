@@ -1,0 +1,30 @@
+<header class="header-container">
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo ServiLocal" width="50">
+    <span>ServiLocal</span>
+  </div>
+
+  <!-- Si está logueado -->
+  <div *ngIf="token; else noSesion" class="menu">
+    <button routerLink="/main">Inicio</button>
+    <button routerLink="/perfil">Mi Cuenta</button>
+    <button (click)="cerrarSesion()">Cerrar Sesión</button>
+
+    <div class="banner banner-activo">
+      🟢 Sesión activa como <strong>{{ usuario?.rol | titlecase }}</strong>
+    </div>
+  </div>
+
+  <!-- Si NO está logueado -->
+  <ng-template #noSesion>
+    <div class="menu">
+      <button routerLink="/login">Iniciar Sesión</button>
+      <button routerLink="/register">Registrarse</button>
+    </div>
+    <div class="banner banner-inactivo">
+      🔴 No has iniciado sesión
+    </div>
+  </ng-template>
+</header>
+
+
