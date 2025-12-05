@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { AdminHome } from './admin-home';
 
 describe('AdminHome', () => {
@@ -7,8 +8,9 @@ describe('AdminHome', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminHome]   
-    }).compileComponents();
+      imports: [AdminHome]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(AdminHome);
     component = fixture.componentInstance;

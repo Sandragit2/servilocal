@@ -1,0 +1,29 @@
+<div class="perfil">
+
+  <h2>Mi Perfil</h2>
+
+  <div *ngIf="mensaje" class="alerta">{{ mensaje }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre">
+
+    <label>Apellidos:</label>
+    <input type="text" formControlName="apellidos">
+
+    <label>Correo:</label>
+    <input type="email" formControlName="correo">
+
+    <label>Teléfono:</label>
+    <input type="text" formControlName="telefono">
+
+    <label>Dirección:</label>
+    <input type="text" formControlName="direccion">
+
+    <button type="submit">Guardar cambios</button>
+
+  </form>
+</div>
+
+

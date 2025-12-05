@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.url; 
+  private apiUrl = environment.url;
 
   identity: any = null;
   token: string | null = null;
@@ -17,7 +17,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // =============================
   // 🔹 LOGIN
+  // =============================
   login(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, data);
   }
@@ -27,7 +29,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/register`, data);
   }
 
-  // 🔹 Guardar sesión completa
+  // =============================
+  // 🔹 GUARDAR SESIÓN
+  // =============================
   saveSession(token: string, usuario: any): void {
     localStorage.setItem('NombreClaveToken', token);
     localStorage.setItem('NombreClaveIdtty', JSON.stringify(usuario));
@@ -39,7 +43,9 @@ export class AuthService {
     this.identity$.emit(usuario);
   }
 
-  // 🔹 Obtener token
+  // =============================
+  // 🔹 OBTENER TOKEN
+  // =============================
   getToken(): string | null {
     const token = localStorage.getItem('NombreClaveToken');
     this.token = token;
@@ -47,7 +53,9 @@ export class AuthService {
     return token;
   }
 
-  // 🔹 Obtener usuario actual
+  // =============================
+  // 🔹 OBTENER IDENTIDAD
+  // =============================
   getUsuario(): any {
     const identity = localStorage.getItem('NombreClaveIdtty');
     this.identity = identity ? JSON.parse(identity) : null;
@@ -55,18 +63,22 @@ export class AuthService {
     return this.identity;
   }
 
-  // 🔹 Verificar si está logueado
+  // =============================
+  // 🔹 ¿ESTÁ LOGUEADO?
+  // =============================
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  // 🔹 Verificar si el usuario tiene cierto rol
+  // 🔹 Validar Rol
   hasRole(role: string): boolean {
     const user = this.getUsuario();
     return user?.rol === role;
   }
 
-  // 🔹 Cerrar sesión
+  // =============================
+  // 🔹 CERRAR SESIÓN
+  // =============================
   logout(): void {
     localStorage.removeItem('NombreClaveToken');
     localStorage.removeItem('NombreClaveIdtty');
@@ -77,7 +89,34 @@ export class AuthService {
     this.token$.emit(null);
     this.identity$.emit(null);
   }
+
+  // ======================================================
+  // 🚀🚀🚀 NUEVO: MÉTODOS PARA PERFIL DEL CLIENTE
+  // ======================================================
+
+  /** 🔸 Adjuntar token al header */
+  private getAuthHeaders() {
+    const token = this.getToken();
+    if (!token) return {};
+
+    return {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      })
+    };
+  }
+
+  /** 🔸 Obtener perfil completo del cliente */
+  getClientePerfil(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/cliente/perfil`, this.getAuthHeaders());
+  }
+
+  /** 🔸 Actualizar perfil del cliente */
+  updateClientePerfil(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cliente/perfil`, data, this.getAuthHeaders());
+  }
 }
+
 
 
 

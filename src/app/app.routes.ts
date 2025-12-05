@@ -12,21 +12,33 @@ export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'register', component: Register },
 
-  // Pantalla principal del cliente
+  // Cliente
   { path: 'main', component: Main },
 
-  // Pantalla del trabajador
+  // ⭐ Mi perfil de cliente
+ {
+  path: 'perfil',
+  loadComponent: () =>
+    import('./components/cliente/perfil-cliente/perfil-cliente')
+      .then(m => m.PerfilCliente),
+  canActivate: [authGuard]
+},
+
+
+  // Trabajador
   {
     path: 'trabajador/home',
     loadComponent: () =>
-      import('./components/trabajador/home/trabajador-home').then(m => m.TrabajadorHome)
+      import('./components/trabajador/home/trabajador-home/trabajador-home')
+        .then(m => m.TrabajadorHome)
   },
 
-  // Pantalla del admin
+  // Admin
   {
     path: 'admin/home',
     loadComponent: () =>
-      import('./components/admin/home/admin-home').then(m => m.AdminHome)
+      import('./components/admin/home/admin-home/admin-home')
+        .then(m => m.AdminHome)
   },
 
   // Store protegido
@@ -34,8 +46,9 @@ export const routes: Routes = [
     path: 'store',
     canActivate: [authGuard],
     loadChildren: () =>
-      import('./components/store/store.routes').then((m) => m.storeRoutes),
+      import('./components/store/store.routes').then(m => m.storeRoutes),
   },
 
-  { path: '**', redirectTo: 'select-role' }
+  { path: '**', redirectTo: 'select-role' },
 ];
+
