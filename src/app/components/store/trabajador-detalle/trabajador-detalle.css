@@ -1,157 +1,163 @@
-/* Fondo general con degradado */
+/* Fondo general */
 .perfil-wrapper {
-  background: linear-gradient(135deg, #f0f4ff, #ffffff);
-  min-height: 100vh;
   padding: 40px 20px;
+  background: linear-gradient(135deg, #dff3ff, #f6fcff);
+  min-height: 100vh;
 }
 
-/* Cabecera del perfil */
+/* Botón volver */
+.btn-volver {
+  background: #0b78d1;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  border: none;
+  margin-bottom: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-volver:hover {
+  background: #085fa8;
+  transform: translateX(-4px);
+}
+
+/* Cabecera */
 .perfil-header {
   display: flex;
   align-items: center;
-  gap: 30px;
-  background: #b1bee2;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 25px;
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.15);
   max-width: 900px;
-  margin: 0 auto 30px;
+  margin: 0 auto 25px;
 }
 
+/* Foto */
 .foto-container {
   flex-shrink: 0;
 }
 
 .foto-trabajador {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
-  border: 4px solid #007bff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  border-radius: 50%;
+  border: 5px solid #0b78d1;
+  box-shadow: 0 0 12px rgba(11,120,209,0.4);
+  transition: 0.3s;
 }
 
-/* Info del trabajador */
-.info-header {
-  flex: 1;
-  font-family: Arial, Helvetica, sans-serif;
+.foto-trabajador:hover {
+  transform: scale(1.05);
 }
 
+/* Info */
 .info-header h2 {
   margin: 0;
   font-size: 2rem;
-  color: #000000;
-  font-weight: 700;
+  font-weight: 800;
+  color: #202020;
 }
 
 .categoria {
   font-size: 1.1rem;
-  color: #074991;
   font-weight: 600;
+  color: #0b78d1;
 }
 
+/* Estrellas */
 .estrellas {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .star {
   font-size: 1.5rem;
-  color: #519909;
+  color: #ccc;
 }
 
 .star.filled {
   color: #ffc107;
 }
 
-.puntuacion {
-  margin-left: 8px;
-  color: #2e2c2c;
-}
-
-.no-calificacion {
-  color: #720a0a;
-  font-style: italic;
-}
-
-/* Cuerpo del perfil */
-.perfil-body {
-  max-width: 900px;
-  margin: 0 auto;
-  background: #b1bee2;
+/* Tarjetas */
+.card-section {
+  background: white;
   padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: 0 auto 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
 }
 
-.descripcion {
-  font-size: 1.1rem;
-  color: #000000;
-  margin-bottom: 20px;
+.card-section h3 {
+  font-weight: 700;
+  color: #0b78d1;
+  margin-bottom: 12px;
 }
 
-.info-contacto {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 15px 0;
-  margin-bottom: 20px;
-}
-
-.info-contacto p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #000000;
-}
-
-.info-extra h4 {
-  color: #045ebe;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
-
-.info-extra p {
-  color: #000000;
+.card-section p {
+  color: #333;
+  font-size: 1.05rem;
 }
 
 /* Reseñas */
-.resenas-section {
-  max-width: 900px;
-  margin: 30px auto;
-  background:#b1bee2;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.resenas-section h3 {
-  color: #000000;
-  margin-bottom: 15px;
-}
-
 .resena-card {
-  background: #b1bee2;
-  padding: 15px 20px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border-left: 4px solid #007bff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  background: #f7faff;
+  padding: 15px;
+  border-left: 5px solid #0b78d1;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
 .resena-header {
   display: flex;
   justify-content: space-between;
+}
+
+.nombre-cliente {
+  font-weight: 700;
+}
+
+.calif {
+  color: #ffc107;
   font-weight: 600;
+}
+
+.fecha {
+  color: #666;
+  font-size: 0.85rem;
 }
 
 .no-resenas {
   text-align: center;
-  color: #777;
   font-style: italic;
+  color: #777;
+}
+
+/* Spinner */
+.spinner {
+  border: 4px solid #ddd;
+  border-top: 4px solid #0b78d1;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
 }
 
 .cargando {
   text-align: center;
-  padding: 60px;
-  color: #555;
+  padding: 80px;
   font-size: 1.2rem;
 }
+
 

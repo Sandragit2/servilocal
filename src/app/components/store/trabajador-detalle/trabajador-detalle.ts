@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, TitleCasePipe, NgIf, NgFor } from '@angular/common';
 import { storeService } from '../../../services/store.service';
+import { RouterModule } from '@angular/router';   // 👈 IMPORTANTE
+
 
 @Component({
   selector: 'app-trabajador-detalle',
   standalone: true,
-  imports: [CommonModule, TitleCasePipe, NgIf, NgFor],
+  imports: [CommonModule, TitleCasePipe, NgIf, NgFor, RouterModule],
   templateUrl: './trabajador-detalle.html',
   styleUrls: ['./trabajador-detalle.css']
 })
@@ -29,19 +31,16 @@ export class TrabajadorDetalleComponent implements OnInit {
 
   obtenerTrabajador(): void {
     this._storeService.getTrabajadorDetalle(this.id).subscribe({
-      next: (response) => {
-        if (response.status === 'success') {
-          this.trabajador = response.trabajador;
-          this.resenas = response.resenas || []; // ← pequeño ajuste opcional
-        } else {
-          console.error('Error:', response.mensaje);
+      next: (res) => {
+        if (res.status === 'success') {
+          this.trabajador = res.trabajador;
+          this.resenas = res.resenas || [];
         }
       },
-      error: (error) => {
-        console.error('Error al obtener trabajador:', error);
-      }
+      error: (err) => console.error(err)
     });
   }
 }
+
 
 

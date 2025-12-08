@@ -1,3 +1,15 @@
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050; /* encima de todo */
+}
+
+body {
+  padding-top: 85px; /* evita que tape el contenido */
+}
+
 .imagen-logo {
   width: 150px;
   height: auto;

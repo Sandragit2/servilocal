@@ -1,34 +1,111 @@
-/* 🌟 Asegura que todas las tarjetas tengan la misma altura y aspecto */
-.card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
+/* Botón Volver */
+.volver-container {
+  margin-bottom: 15px;
+}
+
+.btn-volver {
+  background: #20B2AA;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.btn-volver:hover {
+  background: #1b8f8a;
+  transform: translateX(-3px);
+}
+
+/* Título */
+.titulo {
+  text-align: center;
+  font-weight: 700;
+  color: #0b3d91;
+  margin-bottom: 25px;
+}
+
+/* Spinner */
+.spinner {
+  border: 4px solid #d1d1d1;
+  border-top: 4px solid #20B2AA;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  display: block;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Tarjeta elegante */
+.tarjeta-trabajador {
+  background: white;
+  border-radius: 18px;
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-  transform: scale(1.03);
-}
-
-/* Imagen ajustada */
-.card-img-top {
-  height: 220px;
-  object-fit: contain; /* <-- antes era 'cover' */
-  background-color: #c7dbee; /* color de fondo neutro */
-  padding: 10px;
-}
-
-/* Cuerpo con flex para empujar botón al final */
-.card-body {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  transition: 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-/* Botón centrado y con margen superior */
-.card-body .btn {
-  align-self: center;
-  margin-top: 10px;
+.tarjeta-trabajador:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 7px 22px rgba(0,0,0,0.2);
 }
+
+/* Foto */
+.foto-box {
+  background: #e6eef7;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.foto-trabajador {
+  width: 170px;
+  height: 170px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Info */
+.info-box {
+  padding: 20px;
+  text-align: center;
+}
+
+.info-box h4 {
+  font-weight: 700;
+  color: #0b3d91;
+}
+
+.descripcion {
+  font-size: 0.95rem;
+  color: #555;
+  min-height: 55px;
+  margin: 10px 0;
+}
+
+/* Botón Ver */
+.btn-ver {
+  background: #0b78d1;
+  color: white !important;
+  padding: 8px 22px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.25s;
+}
+
+.btn-ver:hover {
+  background: #085fa8;
+}
+

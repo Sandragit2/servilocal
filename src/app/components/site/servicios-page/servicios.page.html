@@ -1,0 +1,54 @@
+<!-- ENCABEZADO -->
+<section class="hero-section text-white">
+  <div class="hero-content">
+    <h1 class="titulo-hero">Nuestros Servicios</h1>
+    <p class="subtitulo-hero">Conecta con profesionales confiables en tu localidad</p>
+  </div>
+</section>
+
+<!-- 🔙 Botón Volver -->
+<div class="container mt-3">
+  <button class="btn-volver" (click)="volver()">
+    ⬅ Regresar
+  </button>
+</div>
+
+
+<div class="container mt-5">
+
+  <!-- 🛠 Servicios principales -->
+  <h2 class="titulo-seccion text-center mb-4">Servicios disponibles</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let s of servicios">
+      <div class="card servicio-card animate__animated animate__fadeInUp">
+        <div class="icon-wrapper">
+          <img [src]="s.imagen" class="icono-servicio" />
+        </div>
+
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ s.nombre }}</h5>
+          <p class="card-text descripcion">{{ s.descripcion }}</p>
+          <button class="btn btn-servicio" (click)="verProfesionales(s.tipo)">
+            Ver profesionales
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🚀 Próximos servicios -->
+  <h2 class="titulo-seccion text-center mt-5">Próximos servicios</h2>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-3" *ngFor="let p of proximos">
+      <div class="proximo-card animate__animated animate__fadeIn">
+        <h5 class="text-center">{{ p }}</h5>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

@@ -1,42 +1,59 @@
-<!-- src/app/components/store/store/store.html -->
 <div class="container mt-4">
 
-  <h3 class="text-center text-primary mb-4 text-capitalize">
+  <!-- Botón Volver -->
+  <div class="volver-container">
+    <button class="btn-volver" routerLink="/main">⬅ Volver</button>
+  </div>
+
+  <!-- Título de la categoría -->
+  <h3 class="titulo text-capitalize">
     {{ tipoServicio | titlecase }}
   </h3>
 
-  <!-- Mensaje de carga opcional -->
-  <div class="text-center text-muted" *ngIf="cargando">
-    Cargando profesionales...
+  <!-- Mensaje de carga -->
+  <div class="text-center text-muted mt-4" *ngIf="cargando">
+    <div class="spinner"></div>
+    <p>Cargando profesionales...</p>
   </div>
 
+  <!-- Lista -->
   <div class="row justify-content-center g-4" *ngIf="!cargando">
 
     @for (trabajador of trabajadores; track $index) {
       <div class="col-md-4 col-sm-6">
-        <div class="card h-100 shadow-sm">
+        
+        <div class="tarjeta-trabajador">
 
-          <img
-            [src]="'http://localhost:5000/' + trabajador.foto_trabajador"
-            class="card-img-top"
-            alt="foto del trabajador"
-          >
+          <div class="foto-box">
+            <img
+              [src]="'http://localhost:5000/' + trabajador.foto_trabajador"
+              alt="foto trabajador"
+              class="foto-trabajador"
+              onerror="this.src='assets/img/default-user.png'"
+            >
+          </div>
 
-          <div class="card-body">
-            <h5 class="card-title">{{ trabajador.nombre }} {{ trabajador.apellidos }}</h5>
-            <p class="card-text">{{ trabajador.descripcion_trabajo }}</p>
+          <div class="info-box">
+            <h4>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h4>
+
+            <p class="descripcion">
+              {{ trabajador.descripcion_trabajo || 'Sin descripción disponible.' }}
+            </p>
 
             <a
               [routerLink]="['/store/product', trabajador.id_trabajador]"
-              class="btn btn-primary"
+              class="btn-ver"
             >
               Ver perfil
             </a>
           </div>
+
         </div>
+
       </div>
     }
 
+    <!-- Si no hay trabajadores -->
     @if (trabajadores.length === 0) {
       <div class="text-center text-muted mt-5">
         <p>No hay profesionales registrados para este servicio.</p>
@@ -44,7 +61,9 @@
     }
 
   </div>
+
 </div>
+
 
 
 

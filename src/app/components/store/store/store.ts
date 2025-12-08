@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { storeService } from '../../../services/store.service';
 
 @Component({
@@ -12,9 +11,10 @@ import { storeService } from '../../../services/store.service';
   styleUrls: ['./store.css']
 })
 export class Store implements OnInit {
+
   trabajadores: any[] = [];
   tipoServicio: string = '';
-cargando: any;
+  cargando: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,21 +29,26 @@ cargando: any;
   }
 
   cargarTrabajadores() {
+    this.cargando = true;
+
     this.storeService.getTrabajadores().subscribe({
       next: (response) => {
         if (response.status === 'success') {
-          // 🔥 FILTRO CORRECTO
+
           this.trabajadores = response.lista_trabajadores.filter((t: any) =>
             t.categoria?.toLowerCase() === this.tipoServicio.toLowerCase()
           );
         }
+        this.cargando = false;
       },
       error: (error) => {
         console.error('Error al obtener trabajadores:', error);
+        this.cargando = false;
       }
     });
   }
 }
+
 
 
 
