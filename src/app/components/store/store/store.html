@@ -1,8 +1,8 @@
-<div class="container mt-4">
+<div class="container mt-4"> 
 
   <!-- Botón Volver -->
   <div class="volver-container">
-    <button class="btn-volver" routerLink="/main">⬅ Volver</button>
+    <button class="btn-volver" routerLink="/servicios">⬅ Volver</button>
   </div>
 
   <!-- Título de la categoría -->
@@ -26,7 +26,7 @@
 
           <div class="foto-box">
             <img
-              [src]="'http://localhost:5000/' + trabajador.foto_trabajador"
+              [src]="urlBackend + trabajador.foto_trabajador"
               alt="foto trabajador"
               class="foto-trabajador"
               onerror="this.src='assets/img/default-user.png'"
@@ -63,6 +63,7 @@
   </div>
 
 </div>
+
 
 
 

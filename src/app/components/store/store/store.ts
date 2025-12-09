@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { storeService } from '../../../services/store.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-store',
@@ -15,6 +16,7 @@ export class Store implements OnInit {
   trabajadores: any[] = [];
   tipoServicio: string = '';
   cargando: boolean = true;
+  urlBackend = environment.url;   // ⭐ IMPORTANTE
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +50,7 @@ export class Store implements OnInit {
     });
   }
 }
+
 
 
 
