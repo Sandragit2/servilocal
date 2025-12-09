@@ -142,5 +142,63 @@
   to { opacity: 1; }
 }
 
+/* Sección de acciones */
+.contacto-acciones {
+  margin-top: 25px;
+}
+
+.acciones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-action {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-action i {
+  font-size: 1.3rem;
+}
+
+/* Colores */
+.whatsapp { background: #25D366; }
+.whatsapp:hover { background: #1ebe5b; }
+
+.llamar { background: #00796b; }
+.llamar:hover { background: #00675a; }
+
+.correo { background: #ff7043; }
+.correo:hover { background: #f4511e; }
+
+.contratar { background: #3f51b5; }
+.contratar:hover { background: #303f9f; }
+
+/* Botón deshabilitado */
+.btn-action:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .acciones-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 

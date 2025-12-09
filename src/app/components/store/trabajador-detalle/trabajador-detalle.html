@@ -1,14 +1,11 @@
 <div class="detalle-wrapper" *ngIf="trabajador">
-
   <!-- 🔙 Botón volver -->
-  <button class="btn-regresar"
-          routerLink="/store/services/{{ trabajador.categoria }}">
+  <button class="btn-regresar" routerLink="/store/services/{{ trabajador.categoria }}">
     ⬅ Volver
   </button>
 
   <!-- ⭐ Tarjeta principal -->
   <div class="card-detalle">
-
     <!-- Foto y nombre -->
     <div class="perfil-header">
       <img
@@ -25,19 +22,19 @@
         <!-- ⭐ Estrellas -->
         <div class="estrellas">
           <ng-container *ngIf="trabajador.calificacion_promedio; else noCalif">
-            <span *ngFor="let s of [1,2,3,4,5]"
-                  class="star"
-                  [class.filled]="s <= trabajador.calificacion_promedio">★</span>
-            <span class="promedio">
-              {{ trabajador.calificacion_promedio }}/5
-            </span>
+            <span
+              *ngFor="let s of [1, 2, 3, 4, 5]"
+              class="star"
+              [class.filled]="s <= trabajador.calificacion_promedio"
+              >★</span
+            >
+            <span class="promedio"> {{ trabajador.calificacion_promedio }}/5 </span>
           </ng-container>
 
           <ng-template #noCalif>
             <span class="no-calif">Sin calificaciones</span>
           </ng-template>
         </div>
-
       </div>
     </div>
 
@@ -67,6 +64,37 @@
       <p>{{ trabajador.habilidades || 'Sin habilidades registradas.' }}</p>
     </section>
 
+    <!-- 💬 BOTONES DE CONTACTO -->
+    <section class="section contacto-acciones">
+      <h3>Contacto directo</h3>
+
+      <div class="acciones-grid">
+        <!-- WhatsApp -->
+        <button
+          class="btn-action whatsapp"
+          (click)="abrirWhatsApp()"
+          [disabled]="!trabajador.telefono"
+        >
+          <i class="bi bi-whatsapp"></i> WhatsApp
+        </button>
+
+        <!-- Llamar -->
+        <button class="btn-action llamar" (click)="llamar()" [disabled]="!trabajador.telefono">
+          <i class="bi bi-telephone-fill"></i> Llamar
+        </button>
+
+        <!-- Correo -->
+        <button class="btn-action correo" (click)="enviarCorreo()" [disabled]="!trabajador.correo">
+          <i class="bi bi-envelope-fill"></i> Correo
+        </button>
+
+        <!-- Contratar -->
+        <button class="btn-action contratar" (click)="contratar()">
+          <i class="bi bi-cash-stack"></i> Contratar ahora
+        </button>
+      </div>
+    </section>
+
     <!-- ⭐ RESEÑAS -->
     <section class="section resenas">
       <h3>Reseñas</h3>
@@ -85,11 +113,8 @@
       <ng-template #sinResenas>
         <p class="no-resenas">Aún no hay reseñas para este profesional.</p>
       </ng-template>
-
     </section>
-
   </div>
-
 </div>
 
 <!-- Cargando -->
