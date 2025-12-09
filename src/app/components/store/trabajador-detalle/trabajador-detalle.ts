@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, TitleCasePipe, NgIf, NgFor } from '@angular/common';
 import { storeService } from '../../../services/store.service';
-import { RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -13,24 +12,25 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./trabajador-detalle.css'],
 })
 export class TrabajadorDetalleComponent implements OnInit {
-  
   trabajador: any = null;
   resenas: any[] = [];
   id!: number;
+  puedeContactar = false;
 
-  // ⭐ URL universal backend (Render produce imagenes)
   urlBackend = environment.url;
-
-  // ⭐ Aquí después activaremos control de pago (por ahora en false)
-  hasPaid: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private _storeService: storeService
+    private _storeService: storeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+
+    const pago = history.state?.pago;
+    if (pago) this.puedeContactar = true;
+
     this.obtenerTrabajador();
   }
 
@@ -47,28 +47,31 @@ export class TrabajadorDetalleComponent implements OnInit {
   }
 
   abrirWhatsApp() {
-    if (!this.trabajador?.telefono) return;
+    if (!this.puedeContactar || !this.trabajador?.telefono) return;
 
     const numero = this.trabajador.telefono;
     const mensaje = encodeURIComponent(
-      `Hola ${this.trabajador.nombre}, vi tu perfil en ServiLocal y me interesa tu servicio de ${this.trabajador.categoria}.`
+      `Hola ${this.trabajador.nombre}, vi tu perfil en ServiLocal.`
     );
 
     window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
   }
 
   llamar() {
-    if (!this.trabajador?.telefono) return;
+    if (!this.puedeContactar || !this.trabajador?.telefono) return;
     window.location.href = `tel:${this.trabajador.telefono}`;
   }
 
   enviarCorreo() {
-    if (!this.trabajador?.correo) return;
+    if (!this.puedeContactar || !this.trabajador?.correo) return;
     window.location.href = `mailto:${this.trabajador.correo}`;
   }
 
   contratar() {
-    alert('Aquí conectaremos Mercado Pago cuando tú me digas. ✔');
+    this.router.navigate(['/store/payment'], {
+      state: { trabajador: this.trabajador }
+    });
   }
 }
+
 

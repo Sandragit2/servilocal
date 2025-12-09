@@ -1,20 +1,12 @@
 <div class="container">
-  <div class="row justify-content-center">
+  <h2 class="text-center mt-3">Pago a {{ trabajador?.nombre }}</h2>
 
-    <div class="col-10 col-sm-10 col-md-8 col-lg-7 text-center">
-      <h1>Proceso de Pago</h1>
-    </div>
+  <div id="paymentBrick_container" class="mt-4"></div>
 
-    <div class="col-10 col-sm-10 col-md-8 col-lg-7 card pb-2">
-
-      <div id="wallet_container"></div>
-      <div id="paymentBrick_container"></div>
-
-      @if ( isWallet ) {
-        <button class="btn btn-info" (click)="submitPurchase()"> Pagar Ahora </button>
-      }
-
-    </div>
-
-  </div>
+  @if (isWallet) {
+    <button class="btn btn-success mt-3" (click)="submitPurchase()">
+      Pagar ahora
+    </button>
+  }
 </div>
+

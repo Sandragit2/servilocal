@@ -1,92 +1,58 @@
 <div class="detalle-wrapper" *ngIf="trabajador">
-
-  <!-- 🔙 Botón volver -->
   <button class="btn-regresar" routerLink="/store/services/{{ trabajador.categoria }}">
     ⬅ Volver
   </button>
 
-  <!-- ⭐ Tarjeta principal -->
   <div class="card-detalle">
-
-    <!-- 📌 FOTO + NOMBRE -->
     <div class="perfil-header">
       <img
         [src]="urlBackend + trabajador.foto_trabajador"
         onerror="this.src='assets/img/default-user.png'"
         class="foto"
-        alt="Foto del trabajador"
       />
 
       <div class="info-basica">
         <h2>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h2>
         <p class="categoria">{{ trabajador.categoria | titlecase }}</p>
-
-        <!-- Estrellas -->
-        <div class="estrellas">
-          <ng-container *ngIf="trabajador.calificacion_promedio; else noCalif">
-            <span
-              *ngFor="let s of [1, 2, 3, 4, 5]"
-              class="star"
-              [class.filled]="s <= trabajador.calificacion_promedio"
-            >★</span>
-            <span class="promedio">{{ trabajador.calificacion_promedio }}/5</span>
-          </ng-container>
-
-          <ng-template #noCalif>
-            <span class="no-calif">Sin calificaciones</span>
-          </ng-template>
-        </div>
       </div>
     </div>
 
-    <!-- DESCRIPCIÓN -->
     <section class="section">
       <h3>Descripción</h3>
       <p>{{ trabajador.descripcion_trabajo || 'Sin descripción.' }}</p>
     </section>
 
-    <!-- CONTACTO -->
-    <section class="section">
-      <h3>Contacto</h3>
-      <p><strong>Teléfono:</strong> {{ trabajador.telefono || 'No disponible' }}</p>
-      <p><strong>Correo:</strong> {{ trabajador.correo || 'No disponible' }}</p>
-      <p><strong>Ubicación:</strong> {{ trabajador.ubicacion || 'No especificada' }}</p>
-    </section>
-
-    <!-- EXPERIENCIA -->
-    <section class="section">
-      <h3>Experiencia</h3>
-      <p>{{ trabajador.experiencia || 'Este trabajador no ha registrado experiencia.' }}</p>
-    </section>
-
-    <!-- HABILIDADES -->
-    <section class="section">
-      <h3>Habilidades</h3>
-      <p>{{ trabajador.habilidades || 'Sin habilidades registradas.' }}</p>
-    </section>
-
-    <!-- BOTONES DE CONTACTO -->
+    <!-- SECCIÓN DE CONTACTO -->
     <section class="section contacto-acciones">
       <h3>Contacto directo</h3>
 
+      <p *ngIf="!puedeContactar" class="text-danger">
+        🔒 Debes contratar primero para desbloquear el contacto.
+      </p>
+
       <div class="acciones-grid">
-
-        <button class="btn-action whatsapp" (click)="abrirWhatsApp()" [disabled]="!trabajador.telefono">
-          <i class="bi bi-whatsapp"></i> WhatsApp
+        <button class="btn-action whatsapp"
+                (click)="abrirWhatsApp()"
+                [disabled]="!puedeContactar">
+          WhatsApp
         </button>
 
-        <button class="btn-action llamar" (click)="llamar()" [disabled]="!trabajador.telefono">
-          <i class="bi bi-telephone-fill"></i> Llamar
+        <button class="btn-action llamar"
+                (click)="llamar()"
+                [disabled]="!puedeContactar">
+          Llamar
         </button>
 
-        <button class="btn-action correo" (click)="enviarCorreo()" [disabled]="!trabajador.correo">
-          <i class="bi bi-envelope-fill"></i> Correo
+        <button class="btn-action correo"
+                (click)="enviarCorreo()"
+                [disabled]="!puedeContactar">
+          Correo
         </button>
 
-        <button class="btn-action contratar" (click)="contratar()">
-          <i class="bi bi-cash-stack"></i> Contratar ahora
+        <button class="btn-action contratar"
+                (click)="contratar()">
+          Contratar ahora
         </button>
-
       </div>
     </section>
 
@@ -96,26 +62,18 @@
 
       <div *ngIf="resenas.length > 0; else sinResenas">
         <div class="resena-card" *ngFor="let r of resenas">
-          <div class="resena-header">
-            <span class="cliente">{{ r.cliente }}</span>
-            <span class="calif">⭐ {{ r.calificacion }}/5</span>
-          </div>
+          <strong>{{ r.cliente }}</strong>
+          <span>⭐ {{ r.calificacion }}/5</span>
           <p>{{ r.comentarios }}</p>
           <small>{{ r.fecha_resena }}</small>
         </div>
       </div>
 
       <ng-template #sinResenas>
-        <p class="no-resenas">Aún no hay reseñas para este profesional.</p>
+        <p class="no-resenas">Aún no hay reseñas.</p>
       </ng-template>
     </section>
-
   </div>
 </div>
 
-<!-- Cargando -->
-<div *ngIf="!trabajador" class="cargando">
-  <div class="spinner"></div>
-  <p>Cargando información...</p>
-</div>
 
