@@ -1,4 +1,5 @@
 <div class="detalle-wrapper" *ngIf="trabajador">
+
   <!-- 🔙 Botón volver -->
   <button class="btn-regresar" routerLink="/store/services/{{ trabajador.categoria }}">
     ⬅ Volver
@@ -6,7 +7,8 @@
 
   <!-- ⭐ Tarjeta principal -->
   <div class="card-detalle">
-    <!-- Foto y nombre -->
+
+    <!-- 📌 FOTO + NOMBRE -->
     <div class="perfil-header">
       <img
         [src]="urlBackend + trabajador.foto_trabajador"
@@ -19,16 +21,15 @@
         <h2>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h2>
         <p class="categoria">{{ trabajador.categoria | titlecase }}</p>
 
-        <!-- ⭐ Estrellas -->
+        <!-- Estrellas -->
         <div class="estrellas">
           <ng-container *ngIf="trabajador.calificacion_promedio; else noCalif">
             <span
               *ngFor="let s of [1, 2, 3, 4, 5]"
               class="star"
               [class.filled]="s <= trabajador.calificacion_promedio"
-              >★</span
-            >
-            <span class="promedio"> {{ trabajador.calificacion_promedio }}/5 </span>
+            >★</span>
+            <span class="promedio">{{ trabajador.calificacion_promedio }}/5</span>
           </ng-container>
 
           <ng-template #noCalif>
@@ -38,13 +39,13 @@
       </div>
     </div>
 
-    <!-- 📄 DESCRIPCIÓN -->
+    <!-- DESCRIPCIÓN -->
     <section class="section">
       <h3>Descripción</h3>
       <p>{{ trabajador.descripcion_trabajo || 'Sin descripción.' }}</p>
     </section>
 
-    <!-- 📞 CONTACTO -->
+    <!-- CONTACTO -->
     <section class="section">
       <h3>Contacto</h3>
       <p><strong>Teléfono:</strong> {{ trabajador.telefono || 'No disponible' }}</p>
@@ -52,50 +53,44 @@
       <p><strong>Ubicación:</strong> {{ trabajador.ubicacion || 'No especificada' }}</p>
     </section>
 
-    <!-- 🧰 EXPERIENCIA -->
+    <!-- EXPERIENCIA -->
     <section class="section">
       <h3>Experiencia</h3>
       <p>{{ trabajador.experiencia || 'Este trabajador no ha registrado experiencia.' }}</p>
     </section>
 
-    <!-- 🛠 HABILIDADES -->
+    <!-- HABILIDADES -->
     <section class="section">
       <h3>Habilidades</h3>
       <p>{{ trabajador.habilidades || 'Sin habilidades registradas.' }}</p>
     </section>
 
-    <!-- 💬 BOTONES DE CONTACTO -->
+    <!-- BOTONES DE CONTACTO -->
     <section class="section contacto-acciones">
       <h3>Contacto directo</h3>
 
       <div class="acciones-grid">
-        <!-- WhatsApp -->
-        <button
-          class="btn-action whatsapp"
-          (click)="abrirWhatsApp()"
-          [disabled]="!trabajador.telefono"
-        >
+
+        <button class="btn-action whatsapp" (click)="abrirWhatsApp()" [disabled]="!trabajador.telefono">
           <i class="bi bi-whatsapp"></i> WhatsApp
         </button>
 
-        <!-- Llamar -->
         <button class="btn-action llamar" (click)="llamar()" [disabled]="!trabajador.telefono">
           <i class="bi bi-telephone-fill"></i> Llamar
         </button>
 
-        <!-- Correo -->
         <button class="btn-action correo" (click)="enviarCorreo()" [disabled]="!trabajador.correo">
           <i class="bi bi-envelope-fill"></i> Correo
         </button>
 
-        <!-- Contratar -->
         <button class="btn-action contratar" (click)="contratar()">
           <i class="bi bi-cash-stack"></i> Contratar ahora
         </button>
+
       </div>
     </section>
 
-    <!-- ⭐ RESEÑAS -->
+    <!-- RESEÑAS -->
     <section class="section resenas">
       <h3>Reseñas</h3>
 
@@ -114,6 +109,7 @@
         <p class="no-resenas">Aún no hay reseñas para este profesional.</p>
       </ng-template>
     </section>
+
   </div>
 </div>
 
@@ -122,3 +118,4 @@
   <div class="spinner"></div>
   <p>Cargando información...</p>
 </div>
+

@@ -13,14 +13,21 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./trabajador-detalle.css'],
 })
 export class TrabajadorDetalleComponent implements OnInit {
+  
   trabajador: any = null;
   resenas: any[] = [];
   id!: number;
 
-  // ⭐ URL universal backend
+  // ⭐ URL universal backend (Render produce imagenes)
   urlBackend = environment.url;
 
-  constructor(private route: ActivatedRoute, private _storeService: storeService) {}
+  // ⭐ Aquí después activaremos control de pago (por ahora en false)
+  hasPaid: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private _storeService: storeService
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -61,6 +68,7 @@ export class TrabajadorDetalleComponent implements OnInit {
   }
 
   contratar() {
-    alert('Aquí conectamos Mercado Pago cuando tú me digas. ✔');
+    alert('Aquí conectaremos Mercado Pago cuando tú me digas. ✔');
   }
 }
+
