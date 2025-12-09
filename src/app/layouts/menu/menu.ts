@@ -29,7 +29,7 @@ export class Menu implements OnInit {
   logout() {
     this.auth.logout();
     // 👇 usamos el router, NO window.location
-    this.router.navigate(['/login']);
+    this.router.navigate(['/select-role']);
   }
 
   getAvatarColor(nombre: string): string {
