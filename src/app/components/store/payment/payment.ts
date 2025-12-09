@@ -2,7 +2,6 @@ import { Component, Renderer2 } from '@angular/core';
 import { loadMercadoPago } from '@mercadopago/sdk-js';
 import { environment } from '../../../../environments/environment';
 import { storeService } from '../../../services/store.service';
-import { Router } from '@angular/router';
 
 declare global {
   interface Window {
@@ -21,22 +20,12 @@ declare global {
 })
 export class Payment {
   public mp;
-  public trabajador: any;
-  public deviceSessionId = '';
   isWallet = false;
+  public deviceSessionId = '';
 
-  constructor(
-    private _storeService: storeService,
-    private renderer: Renderer2,
-    private router: Router
-  ) {}
+  constructor(private _storeService: storeService, private renderer: Renderer2) {}
 
   ngOnInit() {
-    const nav = history.state;
-    if (nav && nav.trabajador) {
-      this.trabajador = nav.trabajador;
-    }
-
     this.loadSecurityScript();
     this.initMP();
     this.getPreference();
@@ -60,8 +49,35 @@ export class Payment {
     this._storeService.getPreference().subscribe({
       next: (response) => {
         if (response.status === 'success') {
+          console.log(response);
+          // this.initPreference( response.data.id )
           this.initWallet(response.data.id);
+        } else {
+          console.log('Ocurrio un Problema');
+          console.log(response.mensaje);
         }
+      },
+      error: (e) => {
+        let msg = e.error ? e.error.message : e.message;
+        console.log('Ocurrio un Error:' + msg);
+      },
+    });
+  }
+
+  initPreference(idPreference) {
+    const bricksBuilder = this.mp.bricks();
+
+    bricksBuilder.create('wallet', 'wallet_container', {
+      initialization: {
+        preferenceId: idPreference,
+        redirectMode: 'blank',
+      },
+      customization: {
+        theme: 'dark',
+        texts: {
+          action: 'pay',
+          valueProp: 'smart_option',
+        },
       },
     });
   }
@@ -70,8 +86,10 @@ export class Payment {
     const bricksBuilder = this.mp.bricks();
     this.isWallet = true;
 
-    const renderPaymentBrick = async () => {
-      if (window.paymentBrickController) await window.paymentBrickController.unmount();
+    const renderPaymentBrick = async (bricksBuilder) => {
+      if (window.paymentBrickController) {
+        await window.paymentBrickController.unmount();
+      }
 
       const settings = {
         initialization: {
@@ -79,14 +97,30 @@ export class Payment {
           preferenceId: idPreference,
         },
         customization: {
-          visual: { hidePaymentButton: true },
+          visual: {
+            hidePaymentButton: true,
+            hideFormTitle: true,
+            texts: {
+              formSubmit: 'Proceder al Pago',
+              paymentMethods: {
+                newCreditCardTitle: 'Tarjeta de Credito, de un solo uso',
+                newDebitCardTitle: 'Tarjeta de Debito, de un solo uso',
+                debitCardTitle: 'Tarjeta de Debito, de un solo uso',
+                creditCardTitle: 'Tarjeta de Credito, de un solo uso',
+              },
+            },
+          },
+          paymentMethods: {
+            mercadoPago: 'all',
+            creditCard: 'all',
+            debitCard: 'all',
+            maxInstallments: 1,
+          },
         },
         callbacks: {
-          onReady: () => {
-            console.log('Payment Brick listo');
-          },
+          onReady: () => {},
           onError: (error) => {
-            console.error('Error en Payment Brick:', error);
+            /* console.error("Brick error:", error); */
           },
         },
       };
@@ -98,7 +132,7 @@ export class Payment {
       );
     };
 
-    renderPaymentBrick();
+    renderPaymentBrick(bricksBuilder);
   }
 
   submitPurchase() {
@@ -110,23 +144,37 @@ export class Payment {
   }
 
   registerPurchase(formData) {
-    if (window.MP_DEVICE_SESSION_ID) this.deviceSessionId = window.MP_DEVICE_SESSION_ID;
+    if (window.MP_DEVICE_SESSION_ID) {
+      this.deviceSessionId = window.MP_DEVICE_SESSION_ID;
+    }
 
-    const data = {
-      formdata: formData,
-      idfoliocarrito: this.trabajador.id_trabajador,
-      iddevice: this.deviceSessionId,
-      trabajador: this.trabajador,
-    };
+    console.log(formData);
+    console.log(formData.token);
+    console.log(this.deviceSessionId);
 
-    this._storeService.processPayment(data).subscribe({
-      next: (response) => {
-        if (response.status === 'success') {
-          this.router.navigate(['/store/product', this.trabajador.id_trabajador], {
-            state: { pago: response.data },
-          });
-        }
-      },
-    });
+    if (formData.token && this.deviceSessionId) {
+      let data = {
+        formdata: formData, //esto lo genera mercado pago 
+        idfoliocarrito: 1, //id del carrito que estan queriendo cobrar
+        iddevice: this.deviceSessionId,
+      };
+
+      this._storeService.processPayment(data).subscribe({ //solicitud para procesar la compra o el pago 
+        next: (response) => {
+          if (response.status === 'success') {
+            console.log(response);
+          } else {
+            console.log('Ocurrio un Problema');
+            console.log(response.mensaje);
+          }
+        },
+        error: (e) => {
+          let msg = e.error ? e.error.message : e.message;
+          console.log('Ocurrio un Error:' + msg);
+        },
+      });
+    } else {
+      console.log('La informacion ingresada no ha sido validada, por favor vuelve a intentarlo.');
+    }
   }
 }
