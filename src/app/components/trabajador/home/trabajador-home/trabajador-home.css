@@ -1,0 +1,158 @@
+/* ------------------ */
+/* 🌟 BARRA SUPERIOR */
+/* ------------------ */
+.topbar {
+  background: linear-gradient(90deg, #ffe680, #90caf9);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-btn i {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.top-icons i {
+  font-size: 20px;
+  color: #003366;
+  cursor: pointer;
+}
+
+.notif {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* ------------------ */
+/* 🌟 CONTENIDO */
+/* ------------------ */
+
+.dashboard {
+  padding: 15px;
+  background: linear-gradient(#a9cde7, #609bd1);
+  min-height: calc(100vh - 60px);
+}
+
+/* Saludos */
+.bienvenida {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #003366;
+}
+
+.mensaje {
+  text-align: center;
+  color: #f2f2f2;
+  margin-bottom: 20px;
+}
+
+/* TARJETAS */
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #003559;
+}
+
+/* LISTA DE TAREAS */
+.lista-tareas {
+  padding-left: 15px;
+}
+
+.lista-tareas li {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* TARJETA NOTAS */
+.card-notas {
+  background: rgba(255, 245, 184, 0.9);
+  border-left: 5px solid #ff9800;
+}
+
+/* ------------------ */
+/* 📂 MENÚ SECUNDARIO */
+/* ------------------ */
+
+.menu-secundario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.menu-secundario button {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #003366;
+  transition: 0.3s ease;
+}
+
+.menu-secundario button:hover {
+  background: #bbdefb;
+  transform: scale(1.02);
+}
+
+/* ------------------ */
+/* 📱 RESPONSIVE */
+/* ------------------ */
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .topbar {
+    height: 55px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .dashboard {
+    max-width: 650px;
+    margin: auto;
+  }
+}

@@ -43,6 +43,30 @@
   max-width: 1200px;
 }
 
+/* Smartphones */
+@media (max-width: 768px) {
+  .img-carrusel {
+    height: 240px;
+  }
+
+  .carrusel-ajustado {
+    border-radius: 12px;
+  }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+  .img-carrusel {
+    height: 190px;
+  }
+
+  .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+
 /* 👣 Footer */
 footer {
   margin-top: 40px;

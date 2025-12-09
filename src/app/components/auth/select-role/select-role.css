@@ -7,17 +7,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 20px; /* solo espacio arriba */
-  padding-bottom: 60px;
-  .role-container {
-  padding-bottom: 80px; /* 🔹 espacio para que el footer no tape nada */
+  padding: 20px 15px 80px; /* espacio para footer */
 }
 
-}
-
-/* Título y subtítulo */
+/* Título */
 .role-container h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #333;
   margin-bottom: 10px;
@@ -26,7 +21,7 @@
 .subtitle {
   color: #666;
   font-size: 1rem;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 
 /* 🌟 Contenedor de roles */
@@ -34,8 +29,8 @@
   display: flex;
   justify-content: center;
   gap: 40px;
+  flex-wrap: wrap; /* 👈 Hace que se acomode en varias líneas */
   width: 100%;
-  height: 100%;
   max-width: 900px;
 }
 
@@ -44,7 +39,7 @@
   background: #fff;
   border-radius: 15px;
   width: 260px;
-  height: 200px;
+  height: 220px;
   padding: 25px 20px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -58,16 +53,15 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 🌈 Colores según rol */
+/* 🌈 Colores top */
 .card-cliente { border-top-color: #2196F3; }
 .card-trabajador { border-top-color: #43A047; }
 .card-admin { border-top-color: #FF9800; }
 
-/* 🌟 Iconos */
+/* Iconos */
 .icon-wrapper {
-  background: #e3f2fd;
   width: 80px;
-  height: 50px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -76,15 +70,15 @@
 }
 
 .icon-wrapper img {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
 }
 
 .icon-wrapper.cliente { background: #e3f2fd; }
 .icon-wrapper.trabajador { background: #e8f5e9; }
 .icon-wrapper.admin { background: #fff3e0; }
 
-/* 🌟 Textos */
+/* Textos */
 .role-card h3 {
   color: #007bff;
   margin-bottom: 5px;
@@ -97,7 +91,7 @@
   line-height: 1.4;
 }
 
-/* ✨ Animación de entrada */
+/* ✨ Animación entrada */
 .fade-in {
   opacity: 0;
   transform: translateY(25px);
@@ -113,17 +107,62 @@
 
 /* 🌟 Footer */
 .footer {
-  position: fixed;       /* 👈 Lo fija en la parte inferior */
+  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;           /* Ocupa todo el ancho */
+  width: 100%;
   background-color: #222;
   color: #fff;
   font-size: 0.9rem;
   padding: 12px 0;
   text-align: center;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* ligera sombra superior */
-  z-index: 1000;         /* se asegura de que quede por encima */
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+/* 📱📲 RESPONSIVE PARA TELÉFONOS */
+@media (max-width: 768px) {
+  .roles {
+    gap: 20px;
+  }
+
+  .role-card {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    padding: 20px 15px;
+  }
+
+  .icon-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+
+  .icon-wrapper img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .role-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+  }
+}
+
+/* 📱 Teléfonos muy pequeños */
+@media (max-width: 450px) {
+  .role-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .roles {
+    gap: 15px;
+  }
 }
 
 

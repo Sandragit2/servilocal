@@ -12,10 +12,17 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./trabajador-detalle.css'],
 })
 export class TrabajadorDetalleComponent implements OnInit {
+
   trabajador: any = null;
   resenas: any[] = [];
+  habilidades: string[] = [];
+
   id!: number;
   puedeContactar = false;
+
+  promedio = 0;
+  totalResenas = 0;
+  stars = [1, 2, 3, 4, 5];
 
   urlBackend = environment.url;
 
@@ -28,6 +35,7 @@ export class TrabajadorDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
+    // Si viene de /store/payment con pago exitoso
     const pago = history.state?.pago;
     if (pago) this.puedeContactar = true;
 
@@ -40,6 +48,22 @@ export class TrabajadorDetalleComponent implements OnInit {
         if (res.status === 'success') {
           this.trabajador = res.trabajador;
           this.resenas = res.resenas || [];
+
+          // Habilidades → array
+          const rawHabs = this.trabajador?.habilidades as string;
+          this.habilidades = rawHabs
+            ? rawHabs.split(',').map((h: string) => h.trim()).filter((h: string) => h.length > 0)
+            : [];
+
+          // Promedio de reseñas
+          this.totalResenas = this.resenas.length;
+          if (this.totalResenas > 0) {
+            const suma = this.resenas.reduce(
+              (acc: number, r: any) => acc + (r.calificacion || 0),
+              0
+            );
+            this.promedio = Number((suma / this.totalResenas).toFixed(1));
+          }
         }
       },
       error: (err) => console.error(err),
@@ -51,7 +75,7 @@ export class TrabajadorDetalleComponent implements OnInit {
 
     const numero = this.trabajador.telefono;
     const mensaje = encodeURIComponent(
-      `Hola ${this.trabajador.nombre}, vi tu perfil en ServiLocal.`
+      `Hola ${this.trabajador.nombre}, vi tu perfil en ServiLocal y me interesa tu servicio.`
     );
 
     window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
@@ -68,10 +92,13 @@ export class TrabajadorDetalleComponent implements OnInit {
   }
 
   contratar() {
+    // NO se toca el pago: se mantiene igual que ya tenías
     this.router.navigate(['/store/payment'], {
       state: { trabajador: this.trabajador }
     });
   }
 }
+
+
 
 

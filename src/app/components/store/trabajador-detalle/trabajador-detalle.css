@@ -1,7 +1,7 @@
-/* Contenedor general */
+/* Fondo general */
 .detalle-wrapper {
   padding: 20px;
-  background: linear-gradient(135deg, #e4f0ff, #ffffff);
+  background: #eef7ff;
   min-height: 100vh;
 }
 
@@ -12,27 +12,24 @@
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 20px;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
+.btn-regresar:hover { background: #00796b; }
 
-.btn-regresar:hover {
-  background: #00796b;
-}
-
-/* Tarjeta principal */
+/* Card */
 .card-detalle {
   background: white;
   padding: 25px;
   border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   max-width: 900px;
   margin: auto;
-  animation: fadeIn 0.5s ease-in-out;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  margin-top: -28px;
 }
 
-/* Foto + nombre sección */
+/* Foto + info */
 .perfil-header {
   display: flex;
   gap: 20px;
@@ -41,139 +38,97 @@
 }
 
 .foto {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border: 4px solid #009688;
 }
 
+/* Info básica */
 .info-basica h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: bold;
 }
 
 .categoria {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: #00796b;
+}
+
+/* Estrellas */
+.rating-box {
+  margin-top: 5px;
+}
+.star {
+  font-size: 1.7rem;
+  color: #ccc;
+}
+.star.filled {
+  color: gold;
+}
+.rating-text {
+  margin-left: 6px;
   font-weight: 600;
 }
 
-.estrellas {
-  margin-top: 8px;
+/* Habilidades */
+.habilidades span {
+  background: #e0f2f1;
+  color: #00695c;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin-right: 6px;
+  font-size: 1rem;
+  display: inline-block;
+  margin-top: 6px;
 }
 
-.star {
-  font-size: 1.6rem;
-  color: #ccc;
+/* BOTÓN CONTRATAR PRINCIPAL */
+.btn-contratar {
+  background: #3f51b5;
+  color: white;
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+.btn-contratar:hover {
+  background: #303f9f;
 }
 
-.star.filled {
-  color: #ffc107;
-}
-
-.promedio {
-  margin-left: 5px;
-}
-
-.no-calif {
-  font-style: italic;
-  color: #777;
-}
-
-/* Secciones */
-.section {
-  margin-top: 25px;
-}
-
+/* Sección */
 .section h3 {
   color: #009688;
-  margin-bottom: 8px;
   font-weight: 700;
+  font-size: 26px;
 }
 
-/* Reseñas */
-.resenas .resena-card {
-  background: #f2fafe;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  border-left: 4px solid #009688;
-}
-
-.resena-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-.no-resenas {
-  text-align: center;
-  font-style: italic;
-  color: #777;
-}
-
-/* Cargando */
-.cargando {
-  text-align: center;
-  padding: 60px;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #ccc;
-  border-top-color: #009688;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* Animaciones */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Sección de acciones */
-.contacto-acciones {
-  margin-top: 25px;
-}
-
+/* Grid botones contacto */
 .acciones-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
 }
 
+/* Botones contacto */
 .btn-action {
-  width: 100%;
   padding: 12px;
-  border: none;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 1rem;
   color: white;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  align-items: center;
+  border: none;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-.btn-action i {
-  font-size: 1.3rem;
-}
-
-/* Colores */
 .whatsapp { background: #25D366; }
 .whatsapp:hover { background: #1ebe5b; }
 
@@ -183,22 +138,27 @@
 .correo { background: #ff7043; }
 .correo:hover { background: #f4511e; }
 
-.contratar { background: #3f51b5; }
-.contratar:hover { background: #303f9f; }
-
-/* Botón deshabilitado */
 .btn-action:disabled {
-  background: #bdbdbd;
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: 0.7;
+}
+
+/* Reseñas */
+.resena-card {
+  background: #f2fafe;
+  padding: 15px;
+  border-left: 4px solid #009688;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 /* Responsivo */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .acciones-grid {
     grid-template-columns: 1fr;
   }
 }
+
 
 
 

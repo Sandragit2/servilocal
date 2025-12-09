@@ -4,6 +4,8 @@
   </button>
 
   <div class="card-detalle">
+
+    <!-- FOTO + INFO PRINCIPAL -->
     <div class="perfil-header">
       <img
         [src]="urlBackend + trabajador.foto_trabajador"
@@ -14,15 +16,51 @@
       <div class="info-basica">
         <h2>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h2>
         <p class="categoria">{{ trabajador.categoria | titlecase }}</p>
+
+        
+
+        <!-- ESTRELLAS Y PROMEDIO -->
+        <div class="rating-box" *ngIf="resenas.length > 0">
+          <span class="star" *ngFor="let s of [1,2,3,4,5]" 
+                [class.filled]="s <= promedio">
+            ★
+          </span>
+          <span class="rating-text">{{ promedio }}/5</span>
+        </div>
+
+        <!-- Habilidades -->
+        <div class="habilidades" *ngIf="trabajador.habilidades">
+          <span *ngFor="let h of trabajador.habilidades.split(',')">
+            {{ h.trim() }}
+          </span>
+        </div>
+
+        <!-- BOTÓN CONTRATAR (MUY GRANDE) -->
+        <button class="btn-contratar" (click)="contratar()">
+          Contratar ahora
+        </button>
       </div>
     </div>
 
+    <!-- DESCRIPCIÓN -->
     <section class="section">
       <h3>Descripción</h3>
       <p>{{ trabajador.descripcion_trabajo || 'Sin descripción.' }}</p>
     </section>
 
-    <!-- SECCIÓN DE CONTACTO -->
+        <!-- DESCRIPCIÓN -->
+    <section class="section">
+      <h3>Ubicación</h3>
+      <p>{{ trabajador.ubicacion || 'Sin descripción.' }}</p>
+    </section>
+
+        <!-- Experiencia -->
+    <section class="section">
+      <h3>Experiencia</h3>
+      <p>{{ trabajador.experiencia || 'Sin descripción.' }}</p>
+    </section>
+
+    <!-- ACCIONES DE CONTACTO -->
     <section class="section contacto-acciones">
       <h3>Contacto directo</h3>
 
@@ -48,12 +86,8 @@
                 [disabled]="!puedeContactar">
           Correo
         </button>
-
-        <button class="btn-action contratar"
-                (click)="contratar()">
-          Contratar ahora
-        </button>
       </div>
+
     </section>
 
     <!-- RESEÑAS -->
@@ -73,7 +107,9 @@
         <p class="no-resenas">Aún no hay reseñas.</p>
       </ng-template>
     </section>
+
   </div>
 </div>
+
 
 
