@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [],
+  "override": [
+    {
+      "path": "/assets/*",
+      "serve": "/assets/:splat",
+      "status": 200
+    },
+    {
+      "path": "/chunk-*.js",
+      "serve": "/chunk-:splat.js",
+      "status": 200
+    },
+    {
+      "path": "/*.js",
+      "serve": "/:splat.js",
+      "status": 200
+    }
+  ]
+}
+

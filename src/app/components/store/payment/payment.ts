@@ -62,7 +62,7 @@ export class Payment {
         if (response.status === 'success') {
           this.initWallet(response.data.id);
         }
-      }
+      },
     });
   }
 
@@ -71,8 +71,7 @@ export class Payment {
     this.isWallet = true;
 
     const renderPaymentBrick = async () => {
-      if (window.paymentBrickController)
-        await window.paymentBrickController.unmount();
+      if (window.paymentBrickController) await window.paymentBrickController.unmount();
 
       const settings = {
         initialization: {
@@ -82,7 +81,14 @@ export class Payment {
         customization: {
           visual: { hidePaymentButton: true },
         },
-        callbacks: {}
+        callbacks: {
+          onReady: () => {
+            console.log('Payment Brick listo');
+          },
+          onError: (error) => {
+            console.error('Error en Payment Brick:', error);
+          },
+        },
       };
 
       window.paymentBrickController = await bricksBuilder.create(
@@ -104,25 +110,23 @@ export class Payment {
   }
 
   registerPurchase(formData) {
-    if (window.MP_DEVICE_SESSION_ID)
-      this.deviceSessionId = window.MP_DEVICE_SESSION_ID;
+    if (window.MP_DEVICE_SESSION_ID) this.deviceSessionId = window.MP_DEVICE_SESSION_ID;
 
     const data = {
       formdata: formData,
       idfoliocarrito: this.trabajador.id_trabajador,
       iddevice: this.deviceSessionId,
-      trabajador: this.trabajador
+      trabajador: this.trabajador,
     };
 
     this._storeService.processPayment(data).subscribe({
       next: (response) => {
         if (response.status === 'success') {
           this.router.navigate(['/store/product', this.trabajador.id_trabajador], {
-            state: { pago: response.data }
+            state: { pago: response.data },
           });
         }
-      }
+      },
     });
   }
 }
-
