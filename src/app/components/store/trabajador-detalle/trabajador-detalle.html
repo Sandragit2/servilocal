@@ -1,97 +1,99 @@
-<!-- CONTENEDOR GENERAL -->
-<div *ngIf="trabajador" class="perfil-wrapper">
+<div class="detalle-wrapper" *ngIf="trabajador">
 
   <!-- 🔙 Botón volver -->
-  <button class="btn-volver" routerLink="/store/services/{{ trabajador.categoria }}">
-    ⬅ Regresar
+  <button class="btn-regresar"
+          routerLink="/store/services/{{ trabajador.categoria }}">
+    ⬅ Volver
   </button>
 
-  <!-- 🧑‍🔧 CABECERA -->
-  <div class="perfil-header">
-    <div class="foto-container">
+  <!-- ⭐ Tarjeta principal -->
+  <div class="card-detalle">
+
+    <!-- Foto y nombre -->
+    <div class="perfil-header">
       <img
         [src]="urlBackend + trabajador.foto_trabajador"
-        alt="{{ trabajador.nombre }}"
-        class="foto-trabajador"
         onerror="this.src='assets/img/default-user.png'"
+        class="foto"
+        alt="Foto del trabajador"
       />
-    </div>
 
-    <div class="info-header">
-      <h2>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h2>
+      <div class="info-basica">
+        <h2>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h2>
+        <p class="categoria">{{ trabajador.categoria | titlecase }}</p>
 
-      <span class="categoria">{{ trabajador.categoria | titlecase }}</span>
+        <!-- ⭐ Estrellas -->
+        <div class="estrellas">
+          <ng-container *ngIf="trabajador.calificacion_promedio; else noCalif">
+            <span *ngFor="let s of [1,2,3,4,5]"
+                  class="star"
+                  [class.filled]="s <= trabajador.calificacion_promedio">★</span>
+            <span class="promedio">
+              {{ trabajador.calificacion_promedio }}/5
+            </span>
+          </ng-container>
 
-      <!-- ⭐ Estrellas -->
-      <div class="estrellas">
-        <ng-container *ngIf="trabajador.calificacion_promedio; else sinCalif">
-          <span *ngFor="let star of [1,2,3,4,5]" 
-                class="star"
-                [class.filled]="star <= trabajador.calificacion_promedio">★</span>
-          <span class="puntuacion">
-            ({{ trabajador.calificacion_promedio }}/5)
-          </span>
-        </ng-container>
-
-        <ng-template #sinCalif>
-          <span class="no-calificacion">Sin calificaciones aún</span>
-        </ng-template>
-      </div>
-    </div>
-  </div>
-
-  <!-- 📝 DESCRIPCIÓN -->
-  <div class="card-section">
-    <h3>Descripción</h3>
-    <p>{{ trabajador.descripcion_trabajo || 'El trabajador aún no ha agregado una descripción.' }}</p>
-  </div>
-
-  <!-- 📞 CONTACTO -->
-  <div class="card-section">
-    <h3>Información de contacto</h3>
-    <p><i class="bi bi-telephone-fill text-primary"></i> <strong>Teléfono:</strong> {{ trabajador.telefono || 'No disponible' }}</p>
-    <p><i class="bi bi-envelope-fill text-danger"></i> <strong>Correo:</strong> {{ trabajador.correo || 'No disponible' }}</p>
-    <p><i class="bi bi-geo-alt-fill text-warning"></i> <strong>Ubicación:</strong> {{ trabajador.ubicacion || 'No especificada' }}</p>
-  </div>
-
-  <!-- 📚 EXPERIENCIA -->
-  <div class="card-section">
-    <h3>Experiencia</h3>
-    <p>{{ trabajador.experiencia || 'Aún no se ha registrado experiencia.' }}</p>
-  </div>
-
-  <!-- 🛠 HABILIDADES -->
-  <div class="card-section">
-    <h3>Habilidades</h3>
-    <p>{{ trabajador.habilidades || 'Sin habilidades registradas.' }}</p>
-  </div>
-
-  <!-- ⭐ RESEÑAS -->
-  <div class="card-section resenas-section">
-    <h3>Opiniones de clientes</h3>
-
-    <div *ngIf="resenas.length > 0; else sinResenas">
-      <div class="resena-card" *ngFor="let r of resenas">
-        <div class="resena-header">
-          <strong class="nombre-cliente">{{ r.cliente }}</strong>
-          <span class="calif">⭐ {{ r.calificacion }}/5</span>
+          <ng-template #noCalif>
+            <span class="no-calif">Sin calificaciones</span>
+          </ng-template>
         </div>
-        <p>{{ r.comentarios }}</p>
-        <small class="fecha">{{ r.fecha_resena }}</small>
+
       </div>
     </div>
 
-    <ng-template #sinResenas>
-      <p class="no-resenas">Este trabajador aún no tiene reseñas.</p>
-    </ng-template>
+    <!-- 📄 DESCRIPCIÓN -->
+    <section class="section">
+      <h3>Descripción</h3>
+      <p>{{ trabajador.descripcion_trabajo || 'Sin descripción.' }}</p>
+    </section>
+
+    <!-- 📞 CONTACTO -->
+    <section class="section">
+      <h3>Contacto</h3>
+      <p><strong>Teléfono:</strong> {{ trabajador.telefono || 'No disponible' }}</p>
+      <p><strong>Correo:</strong> {{ trabajador.correo || 'No disponible' }}</p>
+      <p><strong>Ubicación:</strong> {{ trabajador.ubicacion || 'No especificada' }}</p>
+    </section>
+
+    <!-- 🧰 EXPERIENCIA -->
+    <section class="section">
+      <h3>Experiencia</h3>
+      <p>{{ trabajador.experiencia || 'Este trabajador no ha registrado experiencia.' }}</p>
+    </section>
+
+    <!-- 🛠 HABILIDADES -->
+    <section class="section">
+      <h3>Habilidades</h3>
+      <p>{{ trabajador.habilidades || 'Sin habilidades registradas.' }}</p>
+    </section>
+
+    <!-- ⭐ RESEÑAS -->
+    <section class="section resenas">
+      <h3>Reseñas</h3>
+
+      <div *ngIf="resenas.length > 0; else sinResenas">
+        <div class="resena-card" *ngFor="let r of resenas">
+          <div class="resena-header">
+            <span class="cliente">{{ r.cliente }}</span>
+            <span class="calif">⭐ {{ r.calificacion }}/5</span>
+          </div>
+          <p>{{ r.comentarios }}</p>
+          <small>{{ r.fecha_resena }}</small>
+        </div>
+      </div>
+
+      <ng-template #sinResenas>
+        <p class="no-resenas">Aún no hay reseñas para este profesional.</p>
+      </ng-template>
+
+    </section>
+
   </div>
 
 </div>
 
-<!-- Mensaje de carga -->
+<!-- Cargando -->
 <div *ngIf="!trabajador" class="cargando">
   <div class="spinner"></div>
-  <p>Cargando información del trabajador...</p>
+  <p>Cargando información...</p>
 </div>
-
-

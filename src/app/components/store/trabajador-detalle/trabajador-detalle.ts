@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, TitleCasePipe, NgIf, NgFor } from '@angular/common';
 import { storeService } from '../../../services/store.service';
-import { RouterModule } from '@angular/router';   // 👈 IMPORTANTE
-
+import { RouterModule } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-trabajador-detalle',
@@ -17,7 +17,9 @@ export class TrabajadorDetalleComponent implements OnInit {
   trabajador: any = null;
   resenas: any[] = [];
   id!: number;
-  urlBackend = 'http://127.0.0.1:5000/';
+
+  // ⭐ URL universal backend
+  urlBackend = environment.url;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +43,7 @@ export class TrabajadorDetalleComponent implements OnInit {
     });
   }
 }
+
 
 
 
