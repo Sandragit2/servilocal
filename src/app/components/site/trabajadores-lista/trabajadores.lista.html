@@ -1,0 +1,115 @@
+<div class="trabajadores-page">
+
+  <!-- Título y filtros -->
+  <section class="header-section container">
+    <h2 class="titulo">Encuentra a tu profesional ideal</h2>
+    <p class="subtitulo">
+      Filtra por categoría o busca por nombre, habilidades o ubicación.
+    </p>
+
+    <div class="filtros row g-2 align-items-center">
+      <div class="col-12 col-md-4">
+        <label class="form-label mb-1">Categoría</label>
+        <div class="btn-group w-100 flex-wrap">
+          <button
+            type="button"
+            class="btn btn-sm filtro-btn"
+            *ngFor="let c of categoriasDisponibles"
+            [class.active]="categoriaSeleccionada === c.id"
+            (click)="cambiarCategoria(c.id)"
+          >
+            {{ c.nombre }}
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <label class="form-label mb-1">Buscar</label>
+        <input
+          type="text"
+          class="form-control rounded-pill"
+          placeholder="Nombre, habilidad o ciudad..."
+          [(ngModel)]="busqueda"
+          (ngModelChange)="onBuscarCambio()"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado de carga / error -->
+  <section class="container mt-3">
+    <div *ngIf="cargando" class="alert alert-info text-center">
+      Cargando trabajadores...
+    </div>
+    <div *ngIf="errorMsg" class="alert alert-danger text-center">
+      {{ errorMsg }}
+    </div>
+  </section>
+
+  <!-- Lista de trabajadores -->
+  <section class="container mt-3">
+    <div
+      *ngIf="!cargando && !errorMsg && filtrados.length === 0"
+      class="alert alert-warning text-center"
+    >
+      No se encontraron trabajadores con los filtros seleccionados.
+    </div>
+
+    <div class="row g-3">
+      <div
+        class="col-12 col-sm-6 col-lg-4"
+        *ngFor="let t of filtrados"
+      >
+        <div class="card trabajador-card h-100">
+
+          <div class="card-header d-flex align-items-center">
+            <img [src]="getFoto(t)" class="avatar-card me-2" alt="Foto trabajador" />
+            <div>
+              <h5 class="mb-0 nombre">{{ t.nombre }}</h5>
+              <small class="categoria text-capitalize">
+                {{ t.categoria || 'Sin categoría' }}
+              </small>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <p class="descripcion mb-2">
+              {{ t.descripcion_trabajo || 'Sin descripción registrada.' }}
+            </p>
+
+            <p class="texto-secundario mb-1" *ngIf="t.experiencia">
+              <i class="bi bi-briefcase-fill me-1"></i>
+              {{ t.experiencia }}
+            </p>
+
+            <p class="texto-secundario mb-1" *ngIf="t.ubicacion">
+              <i class="bi bi-geo-alt-fill me-1"></i>
+              {{ t.ubicacion }}
+            </p>
+
+            <p class="texto-secundario mb-1" *ngIf="t.habilidades">
+              <i class="bi bi-stars me-1"></i>
+              {{ t.habilidades }}
+            </p>
+
+            <p class="texto-secundario mb-0" *ngIf="t.calificacion_promedio != null">
+              <i class="bi bi-star-fill text-warning me-1"></i>
+              {{ t.calificacion_promedio }} / 5
+            </p>
+          </div>
+
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <span class="small text-muted" *ngIf="t.telefono">
+              <i class="bi bi-telephone me-1"></i>{{ t.telefono }}
+            </span>
+
+            <!-- Botón para ver detalle (conéctalo a la ruta que tengas) -->
+            <button class="btn btn-sm btn-primary">
+              Ver perfil
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

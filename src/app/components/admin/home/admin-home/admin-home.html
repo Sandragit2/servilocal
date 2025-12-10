@@ -1,5 +1,44 @@
-<div class="container">
-  <h2>{{ titulo }}</h2>
-  <p>Pantalla principal del administrador.</p>
+<!-- 🔹 Topbar -->
+<div class="topbar">
+  <h1>{{ titulo }}</h1>
+  <div class="admin-info">
+    <i class="fas fa-user-shield"></i> Administrador
+  </div>
 </div>
+
+<!-- 🔹 Contenedor principal -->
+<div class="admin-dashboard">
+
+  <!-- ⭐ Estadísticas -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let s of stats">
+      <i [class]="s.icon"></i>
+      <h3>{{ s.value }}</h3>
+      <p>{{ s.label }}</p>
+    </div>
+  </div>
+
+  <!-- ⭐ Accesos rápidos -->
+  <h2 class="section-title">Accesos rápidos</h2>
+
+  <div class="accesos-grid">
+    <div class="acceso-card" *ngFor="let a of accesos" [routerLink]="a.route">
+      <i [class]="a.icon"></i>
+      <span>{{ a.name }}</span>
+    </div>
+  </div>
+
+  <!-- ⭐ (Opcional) Gráfica de ejemplo -->
+  <h2 class="section-title mt-4">Actividad reciente</h2>
+
+  <div class="chart-card">
+    <img src="https://quickchart.io/chart?c={
+      type:'bar',
+      data:{labels:['Ene','Feb','Mar','Abr','May'],datasets:[{label:'Servicios',data:[12,19,7,15,23]}]},
+      options:{legend:{display:false}}
+    }" alt="Gráfica" class="chart-img" />
+  </div>
+
+</div>
+
 

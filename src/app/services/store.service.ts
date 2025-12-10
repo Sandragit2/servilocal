@@ -9,10 +9,7 @@ import { AuthService } from './auth.service';
 export class storeService {
   public url: string;
 
-  constructor(
-    private _http: HttpClient,
-    private authService: AuthService
-  ) {
+  constructor(private _http: HttpClient, private authService: AuthService) {
     this.url = environment.url; // ej. 'http://127.0.0.1:5000/'
   }
 
@@ -30,43 +27,34 @@ export class storeService {
 
   /** 🔹 Obtener TODOS los trabajadores (por si luego lo usas en Admin) */
   getTrabajadores(): Observable<any> {
-    return this._http.get(
-      `${this.url}store/store`,
-      { headers: this.buildHeaders() }
-    );
+    return this._http.get(`${this.url}store/store`, { headers: this.buildHeaders() });
   }
 
   /** 🔹 Obtener trabajadores FILTRADOS por tipo (albañiles, electricista, tutor...) */
   getTrabajadoresPorTipo(tipo: string): Observable<any> {
-    return this._http.get(
-      `${this.url}store/trabajadores/${tipo}`,
-      { headers: this.buildHeaders() }
-    );
+    return this._http.get(`${this.url}store/trabajadores/${tipo}`, {
+      headers: this.buildHeaders(),
+    });
   }
 
   /** 🔹 Detalle de un trabajador */
   getTrabajadorDetalle(id: number): Observable<any> {
-    return this._http.get(
-      `${this.url}store/trabajador/${id}`,
-      { headers: this.buildHeaders() }
-    );
+    return this._http.get(`${this.url}store/trabajador/${id}`, { headers: this.buildHeaders() });
   }
 
   /** 🔹 Preferencia de Mercado Pago */
   getPreference(): Observable<any> {
-    return this._http.get(
-      `${this.url}preferencemp`,
-      { headers: this.buildHeaders() }
-    );
+    return this._http.get(`${this.url}preferencemp`, { headers: this.buildHeaders() });
   }
 
   /** 🔹 Enviar datos de pago al backend (cuando lo tengas listo) */
   processPayment(data: any): Observable<any> {
-    return this._http.post(
-      `${this.url}processpayment`,
-      data,
-      { headers: this.buildHeaders() }
-    );
+    return this._http.post(`${this.url}processpayment`, data, { headers: this.buildHeaders() });
+  }
+
+  getTrabajadorPorUsuario(idUsuario: number): Observable<any> {
+    return this._http.get(`${this.url}store/trabajador/usuario/${idUsuario}`, {
+      headers: this.buildHeaders(),
+    });
   }
 }
-

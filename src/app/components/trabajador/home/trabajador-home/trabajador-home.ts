@@ -2,19 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { TitleCasePipe, NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
 import { storeService } from '../../../../services/store.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-trabajador-home',
   standalone: true,
   templateUrl: './trabajador-home.html',
   styleUrls: ['./trabajador-home.css'],
-  imports: [NgIf, NgFor, TitleCasePipe]   // 👈 AQUI SE AGREGA TitleCasePipe
+  imports: [NgIf, NgFor, TitleCasePipe],
 })
 export class TrabajadorHome implements OnInit {
 
   trabajador: any = null;
-  tareas: any[] = [];
+  tareas: string[] = [];
   notas: string[] = [];
+  menuOpen = false;
+
+  backendUrl = environment.url;  // Ej: http://127.0.0.1:5000/
 
   constructor(
     private authService: AuthService,
@@ -23,85 +27,117 @@ export class TrabajadorHome implements OnInit {
 
   ngOnInit() {
     const usuario = this.authService.getUsuario();
+    console.log("USUARIO LOGEADO:", usuario);
 
     if (!usuario) return;
 
-    this.storeSrv.getTrabajadorDetalle(usuario.id).subscribe({
+    this.storeSrv.getTrabajadorPorUsuario(usuario.id).subscribe({
       next: (res) => {
-        if (res.status === 'success') {
+        console.log("RESPUESTA DEL BACKEND:", res);
+
+        if (res.status === "success") {
           this.trabajador = res.trabajador;
-          this.tareas = this.generarTareas(res.trabajador.categoria);
-          this.notas = this.generarNotas(res.trabajador.categoria);
+          this.tareas = this.generarTareas(this.trabajador.categoria);
+          this.notas = this.generarNotas(this.trabajador.categoria);
         }
       },
-      error: (e) => console.error(e)
+      error: (e) => console.error("ERROR BACKEND:", e)
     });
   }
 
+  /** -----------------------------------------
+   *  🌟 MENÚ LATERAL
+   * ----------------------------------------- */
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  /** -----------------------------------------
+   *  🚪 CERRAR SESIÓN
+   * ----------------------------------------- */
+  logout() {
+    this.authService.logout();
+    window.location.href = "/login"; // fuerza recarga limpia
+  }
+
+  /** -----------------------------------------
+   *  🔔 ICONOS SUPERIORES
+   * ----------------------------------------- */
+  goMensajes() {
+    window.location.href = "/trabajador/home";
+  }
+
+  goNotificaciones() {
+    window.location.href = "/trabajador/home";
+  }
+
+  goPerfil() {
+    window.location.href = "/trabajador/home";
+  }
+
+  /** -----------------------------------------
+   *  📌 GENERADOR DE TAREAS AUTOMÁTICAS
+   * ----------------------------------------- */
   generarTareas(categoria: string) {
-    switch (categoria.toLowerCase()) {
-      case 'albañiles':
+    switch (categoria?.toLowerCase()) {
+      case "albañiles":
         return [
           "Cimentación – Área A",
           "Muros perimetrales — Sección norte",
           "Verificación de materiales",
           "Colado de columna – Punto 3",
-          "Limpieza del área de trabajo"
+          "Limpieza del área de trabajo",
         ];
-      case 'electricistas':
+
+      case "electricistas":
         return [
-          "Revisión de luminaria",
+          "Revisión de luminarias",
           "Instalación de cables calibre 12",
-          "Cambio de apagadores",
-          "Mantenimiento de centro de carga"
+          "Cambio de interruptores",
+          "Mantenimiento general eléctrico",
         ];
-      case 'plomeros':
+
+      case "tutores":
         return [
-          "Revisión de fugas",
-          "Instalación de tubería",
-          "Mantenimiento de calentador"
-        ];
-      case 'tutores':
-        return [
-          "Clase de matemáticas",
+          "Preparación de clase",
           "Revisión de tareas",
-          "Preparación de evaluación semanal"
+          "Evaluación semanal",
+          "Atención personalizada",
         ];
+
       default:
-        return ["Sin tareas asignadas."];
+        return ["No hay tareas asignadas."];
     }
   }
 
+  /** -----------------------------------------
+   *  📌 GENERADOR DE NOTAS AUTOMÁTICAS
+   * ----------------------------------------- */
   generarNotas(categoria: string) {
-    switch (categoria.toLowerCase()) {
-      case 'albañiles':
+    switch (categoria?.toLowerCase()) {
+      case "albañiles":
         return [
-          "Pedir mezcla temprano.",
+          "Encargar mezcla temprano.",
           "Tomar fotos del avance.",
-          "Contar blocks faltantes."
+          "Confirmar materiales faltantes.",
         ];
-      case 'electricistas':
+
+      case "electricistas":
         return [
-          "Revisar cables dañados.",
-          "Confirmar voltaje.",
-          "Evitar trabajar con humedad."
+          "Revisar calibración.",
+          "Validar voltaje antes de trabajar.",
+          "Evitar humedad para conexiones.",
         ];
-      case 'plomeros':
+
+      case "tutores":
         return [
-          "Traer sellador.",
-          "Confirmar presión de agua.",
-          "Verificar refacciones necesarias."
+          "Preparar material educativo.",
+          "Revisar desempeño.",
+          "Enviar retroalimentación semanal.",
         ];
-      case 'tutores':
-        return [
-          "Preparar material.",
-          "Revisar calificaciones.",
-          "Enviar retroalimentación."
-        ];
+
       default:
         return ["Sin notas registradas."];
     }
   }
 }
-
-

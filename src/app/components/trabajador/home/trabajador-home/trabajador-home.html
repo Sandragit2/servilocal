@@ -1,57 +1,68 @@
-<!-- 🌟 Barra superior del trabajador -->
+<!-- 🌙 OVERLAY al abrir menú -->
+<div class="overlay" [class.show]="menuOpen" (click)="toggleMenu()"></div>
+
+<!-- 📌 SIDEBAR -->
+<div class="sidebar" [class.open]="menuOpen">
+
+  <button class="close-btn" (click)="toggleMenu()">✕</button>
+
+  <div class="profile">
+    <img
+      [src]="trabajador?.foto_trabajador ? backendUrl + trabajador.foto_trabajador : 'assets/img/default-user.png'"
+      class="avatar-lg"
+    />
+    <h3>{{ trabajador?.nombre }}</h3>
+    <p>{{ trabajador?.categoria | titlecase }}</p>
+  </div>
+
+  <button routerLink="/trabajador/home"><i class="fas fa-home"></i> Inicio</button>
+  <button routerLink="/trabajador/perfil"><i class="fas fa-user"></i> Mi Perfil</button>
+  <button routerLink="/trabajador/tareas"><i class="fas fa-tasks"></i> Tareas</button>
+  <button routerLink="/trabajador/historial"><i class="fas fa-history"></i> Historial</button>
+  <button routerLink="/trabajador/notificaciones"><i class="fas fa-bell"></i> Notificaciones</button>
+
+  <button class="logout" (click)="logout()">
+    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+  </button>
+</div>
+
+<!-- 📌 TOPBAR -->
 <div class="topbar">
-  <button class="menu-btn">
+  <button class="menu-btn" (click)="toggleMenu()">
     <i class="fas fa-bars"></i>
   </button>
 
   <div class="top-icons">
-    <i class="fas fa-envelope"></i>
+    <i class="fas fa-envelope" (click)="goMensajes()"></i>
 
-    <div class="notif">
+    <div class="notif" (click)="goNotificaciones()">
       <i class="fas fa-bell"></i>
       <span class="badge">2</span>
     </div>
 
     <img
-      [src]="trabajador?.foto_trabajador ? trabajador.foto_trabajador : 'assets/img/default-user.png'"
+      [src]="trabajador?.foto_trabajador ? backendUrl + trabajador.foto_trabajador : 'assets/img/default-user.png'"
       class="avatar"
-      alt="Perfil"
+      (click)="goPerfil()"
     />
   </div>
 </div>
 
-<!-- 🌟 Contenido principal -->
+<!-- 📌 CONTENIDO PRINCIPAL -->
 <div class="dashboard" *ngIf="trabajador">
-
-  <!-- Saludo -->
   <h2 class="bienvenida">Hola {{ trabajador.nombre }} 👋</h2>
-  <p class="mensaje">{{ trabajador.categoria | titlecase }} </p>
+  <p class="mensaje">{{ trabajador.categoria | titlecase }}</p>
 
-  <!-- 📋 TAREAS PRÓXIMAS -->
   <div class="card">
     <h3><i class="fas fa-tasks"></i> Tus tareas próximas</h3>
-
     <ul class="lista-tareas">
       <li *ngFor="let t of tareas">✔ {{ t }}</li>
     </ul>
   </div>
 
-  <!-- 📝 NOTAS -->
   <div class="card card-notas">
     <h3>📌 Notas importantes</h3>
-
-    <p *ngFor="let n of notas">
-      • {{ n }}
-    </p>
+    <p *ngFor="let n of notas">• {{ n }}</p>
   </div>
-
-  <!-- 📂 ACCESOS DIRECTOS -->
-  <div class="menu-secundario">
-    <button>Inicio</button>
-    <button>Tareas</button>
-    <button>Historial</button>
-  </div>
-
 </div>
-
 

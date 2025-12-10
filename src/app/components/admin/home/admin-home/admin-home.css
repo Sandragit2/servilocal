@@ -1,0 +1,125 @@
+/* ============================= */
+/* 🔹 Topbar */
+/* ============================= */
+.topbar {
+  background: linear-gradient(90deg, #004d99, #0073e6);
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 15px 15px;
+}
+
+.topbar h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.admin-info {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================= */
+/* 🔹 Contenedor general */
+/* ============================= */
+.admin-dashboard {
+  padding: 20px;
+}
+
+/* ============================= */
+/* ⭐ Tarjetas de estadísticas */
+/* ============================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card i {
+  font-size: 2.5rem;
+  color: #0073e6;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.stat-card p {
+  margin: 5px 0 0;
+  color: #555;
+}
+
+/* ============================= */
+/* ⭐ Accesos rápidos */
+/* ============================= */
+
+.section-title {
+  margin-top: 25px;
+  font-size: 1.5rem;
+  color: #003366;
+  font-weight: bold;
+}
+
+.accesos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.acceso-card {
+  background: #e3f2fd;
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: 1px solid #90caf9;
+}
+
+.acceso-card:hover {
+  background: #bbdefb;
+  transform: scale(1.03);
+}
+
+.acceso-card i {
+  font-size: 2rem;
+  color: #0073e6;
+  margin-bottom: 8px;
+}
+
+/* ============================= */
+/* ⭐ Gráfica */
+/* ============================= */
+.chart-card {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.chart-img {
+  width: 100%;
+  border-radius: 10px;
+}

@@ -32,6 +32,8 @@ export class Menu implements OnInit {
     this.router.navigate(['/select-role']);
   }
 
+  
+
   getAvatarColor(nombre: string): string {
     const colores = ['#FF8A80', '#FFB74D', '#81C784', '#4FC3F7', 
       '#9575CD', '#F06292', '#AED581', '#64B5F6'];
